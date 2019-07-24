@@ -1,24 +1,34 @@
 import React from "react";
 import AddButton from "../AddButton/AddButton.jsx";
+import ColorPicker from "../ColorPicker/ColorPicker.jsx";
 import "./NoteEditor.css";
 
 class NoteEditor extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {text: ''};
+        this.state = {
+            text: '',
+            color: '#82e8a4'
+        };
         this.addNote = this.addNote.bind(this);
+        this.setColor = this.setColor.bind(this);
     }
     handleInput(e){
         this.setState({
             text: e.target.value
         });
     }
+    setColor(color) {
+        this.setState({
+            color: color
+        })
+    }
     addNote(){
         if(this.state.text && this.state.text !== ' ') {
             let newNote={};
             newNote.text = this.state.text;
             newNote.id = Date.now();
-            newNote.color = '#82e8a4';
+            newNote.color = this.state.color;
             this.props.onNoteAdd(newNote);
             this.setState({
                 text: ''
@@ -36,7 +46,10 @@ class NoteEditor extends React.Component {
                                   onChange={(e) => this.handleInput(e)}/>
                     </div>
                 </div>
+                <div className="row justify-content-end mb-3 px-0">
+                <ColorPicker onColorChoose={this.setColor}/>
                 <AddButton onAddNote={this.addNote}/>
+                </div>
             </div>
         );
     }

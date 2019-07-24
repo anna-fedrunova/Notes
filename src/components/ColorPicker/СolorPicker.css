@@ -1,0 +1,27 @@
+.picker-container{
+    display: flex;
+   justify-content: flex-end;
+}
+.picker-container img{
+    transition: all ease-out 10ms;
+}
+.picker-container img:hover{
+    position:relative;
+    top:-5px;
+}
+.color-picker:hover{
+    box-shadow: 0 0 1px #2f6627;;
+}
+.color-picker{
+    border: none;
+    margin: 10px 10px 0 10px;
+    width: 20%;
+    background: inherit;
+}
+.color-picker:active {
+    position:relative;
+    top:-5px;
+}
+.color-picker:focus{
+    outline: none;
+}
