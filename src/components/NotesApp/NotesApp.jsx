@@ -15,39 +15,47 @@ class NotesApp extends React.Component {
         };
         this.handleNoteAdd= this.handleNoteAdd.bind(this);
         this.handleNoteDelete = this.handleNoteDelete.bind(this);
+        this.handleNoteSearch = this.handleNoteSearch.bind(this);
     }
     componentDidMount(){
-        let localNotes = JSON.parse(localStorage.getItem('localNotes'));
-        if(localNotes) {
+        this.localNotes = JSON.parse(localStorage.getItem('localNotes'));
+        if(this.localNotes) {
             this.setState ({
-                notes: localNotes
+                notes: this.localNotes,
             })
         }
     }
-    componentDidUpdate(){
-        this.updateLocalStorage();
-    }
     handleNoteAdd(newNote){
-        let newNotes = [...this.state.notes];
+        let newNotes = [...this.localNotes];
         newNotes.unshift(newNote);
         this.setState({
             notes: newNotes
-        })
+        }, this.updateLocalStorage);
     }
     handleNoteDelete(note){
         let id = note.id;
-        let newNotes = this.state.notes.filter((note) => note.id !== id);
+        let newNotes = this.localNotes.filter((note) => note.id !== id);
         this.setState({
             notes: newNotes
+        }, this.updateLocalStorage);
+
+    }
+    handleNoteSearch(searchString){
+        let searchedNotes = this.localNotes.filter((note) => ~note.text.toLowerCase().indexOf(searchString));
+        this.setState({
+            notes: searchedNotes
         })
     }
     updateLocalStorage(){
         localStorage.setItem('localNotes', JSON.stringify(this.state.notes));
+        this.localNotes = JSON.parse(localStorage.getItem('localNotes'));
     }
     render(){
         return (
             <div className="container notes-app">
-                <NoteEditor onNoteAdd={this.handleNoteAdd}/>
+                <NoteEditor onNoteAdd={this.handleNoteAdd}
+                            onNoteSearch={this.handleNoteSearch}
+                />
                 <NotesGrid notes={this.state.notes}
                            onNoteDelete={this.handleNoteDelete}/>
             </div>

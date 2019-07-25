@@ -1,6 +1,7 @@
 import React from "react";
 import AddButton from "../AddButton/AddButton.jsx";
 import ColorPicker from "../ColorPicker/ColorPicker.jsx";
+import NotesSearch from "../NotesSearch/NotesSearch.jsx"
 import "./NoteEditor.css";
 
 class NoteEditor extends React.Component {
@@ -12,6 +13,7 @@ class NoteEditor extends React.Component {
         };
         this.addNote = this.addNote.bind(this);
         this.setColor = this.setColor.bind(this);
+        this.handleSearch = this.handleSearch.bind(this);
     }
     handleInput(e){
         this.setState({
@@ -35,6 +37,9 @@ class NoteEditor extends React.Component {
             });
         }
     }
+    handleSearch(searchString){
+        this.props.onNoteSearch(searchString);
+    }
     render(){
         return (
             <div className="note-editor">
@@ -47,8 +52,10 @@ class NoteEditor extends React.Component {
                     </div>
                 </div>
                 <div className="row justify-content-end mb-3 px-0">
-                <ColorPicker onColorChoose={this.setColor}/>
-                <AddButton onAddNote={this.addNote}/>
+                    <NotesSearch onSearch={this.handleSearch}
+                    />
+                    <ColorPicker onColorChoose={this.setColor}/>
+                    <AddButton onAddNote={this.addNote}/>
                 </div>
             </div>
         );
