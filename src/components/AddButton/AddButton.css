@@ -17,4 +17,6 @@
 }
 .add-button:focus {
     outline: 0;
+    background-color:#5cbf2a;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.12), 0 2px 6px rgba(0,0,0,0.24);
 }
