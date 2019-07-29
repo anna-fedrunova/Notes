@@ -22,6 +22,7 @@ class NotesGrid extends React.Component {
         return (
             <div className="row justify-content-between notes-grid" ref="grid">
                 <div className="col-12 px-0">
+                    <h3 className="message"> {this.props.message} </h3>
                     <div className="grid-size"></div>
                     {this.props.notes.map((note) => {
                         return(

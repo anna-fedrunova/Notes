@@ -1,3 +1,7 @@
 .grid-size {
     width: 24%;
 }
+.message {
+    text-align: center;
+    color: #6c757d;
+}
