@@ -5,10 +5,11 @@ class AddButton extends React.Component {
     render() {
         return (
             <div className="col-2">
-                <input className="add-button"
+                <button className="add-button"
                        type="button"
-                       value="ADD"
-                       onClick={this.props.onAddNote}/>
+                       onClick={this.props.onAddNote}>
+                    <p>ADD</p>
+                </button>
             </div>
         );
     }
