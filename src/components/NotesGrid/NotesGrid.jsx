@@ -12,7 +12,7 @@ class NotesGrid extends React.Component {
         });
     }
     shouldComponentUpdate(nextProps){
-        return nextProps.notes.length !== this.props.notes.length;
+        return nextProps.notes.length !== this.props.notes.length || nextProps.message !== this.props.message;
     }
     componentDidUpdate(){
         this.msnry.reloadItems();
