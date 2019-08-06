@@ -27,12 +27,15 @@ class NotesApp extends React.Component {
             })
         }
     }
+    componentDidUpdate() {
+        this.updateLocalStorage();
+    }
     handleNoteAdd(newNote){
         let newNotes = [...this.state.notes];
         newNotes.unshift(newNote);
         this.setState({
             notes: newNotes,
-        }, this.updateLocalStorage);
+        });
     }
     handleNoteDelete(note){
         let handleNoteSearch = this.handleNoteSearch.bind(null, this.state.searchQuery);
@@ -41,7 +44,6 @@ class NotesApp extends React.Component {
         this.setState({
             notes: newNotes,
         }, handleNoteSearch);
-        this.updateLocalStorage();
     }
     handleNoteSearch(searchString){
         let searchedNotes = this._getVisibleNotes(this.state.notes, searchString.toLowerCase());
